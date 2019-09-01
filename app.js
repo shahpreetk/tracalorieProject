@@ -30,8 +30,11 @@ const ItemCtrl = (function () {
         currentItem: null,
         totalCalories: 0
     }
-
+    // PUBLIC METHODS
     return {
+        getItems: function () {
+            return data.items;
+        },
         logData: function () {
             return data;
         }
@@ -39,16 +42,38 @@ const ItemCtrl = (function () {
 })();
 
 
-// UI Controller
+// UI CONTROLLER
 const UICtrl = (function () {
+    // PUBLIC METHODS
+    return {
+        populateItemList: function (items) {
+            let html = '';
 
+            items.forEach(function (item) {
+                html += `<li class="collection-item" id="item-${item.id}">
+                <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
+                <a href="#" class="secondary-content">
+                    <i class="edit-item fa fa-pencil"></i>
+                </a>
+            </li>`;
+            });
+
+            // INSERT LIST ITEMS
+            document.querySelector('#item-list').innerHTML=html;
+        }
+    }
 })();
 
-// App Cotroller
+// APP CONTROLLER
 const App = (function (ItemCtrl, UICtrl) {
+    // PUBLIC METHODS
     return {
         init: function () {
-            console.log('Initializing App...');
+            // FETCH ITEMS FROM DATA STRUCTURE
+            const items = ItemCtrl.getItems();
+
+            // POPULATE LIST WITH ITEMS
+            UICtrl.populateItemList(items);
         }
     }
 })(ItemCtrl, UICtrl);
