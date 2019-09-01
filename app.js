@@ -10,18 +10,29 @@ const ItemCtrl = (function () {
     }
 
     // Data Structure / State
-    const data={
-        items:[
-            {id:0, name:'Steak Dinner',calories:1200},
-            {id:1, name:'Cookie',calories:400},
-            {id:2, name:'Eggs',calories:300},
+    const data = {
+        items: [{
+                id: 0,
+                name: 'Steak Dinner',
+                calories: 1200
+            },
+            {
+                id: 1,
+                name: 'Cookie',
+                calories: 400
+            },
+            {
+                id: 2,
+                name: 'Eggs',
+                calories: 300
+            },
         ],
-        currentItem:null,
-        totalCalories:0
+        currentItem: null,
+        totalCalories: 0
     }
 
-    return{
-        logData:function(){
+    return {
+        logData: function () {
             return data;
         }
     }
@@ -35,5 +46,12 @@ const UICtrl = (function () {
 
 // App Cotroller
 const App = (function (ItemCtrl, UICtrl) {
-
+    return {
+        init: function () {
+            console.log('Initializing App...');
+        }
+    }
 })(ItemCtrl, UICtrl);
+
+// INITIALIZE APP
+App.init();
