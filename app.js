@@ -11,21 +11,21 @@ const ItemCtrl = (function () {
 
     // Data Structure / State
     const data = {
-        items: [{
-                id: 0,
-                name: 'Steak Dinner',
-                calories: 1200
-            },
-            {
-                id: 1,
-                name: 'Cookie',
-                calories: 400
-            },
-            {
-                id: 2,
-                name: 'Eggs',
-                calories: 300
-            },
+        items: [
+            //     {id: 0,
+            //     name: 'Steak Dinner',
+            //     calories: 1200
+            // },
+            // {
+            //     id: 1,
+            //     name: 'Cookie',
+            //     calories: 400
+            // },
+            // {
+            //     id: 2,
+            //     name: 'Eggs',
+            //     calories: 300
+            // },
         ],
         currentItem: null,
         totalCalories: 0
@@ -95,6 +95,8 @@ const UICtrl = (function () {
             }
         },
         addListItem: function (item) {
+            // SHOW THE LIST
+            document.querySelector(UISelectors.itemList).style.display='block';
             // CREATE LI ELEMENT
             const li = document.createElement('li');
             // ADD CLASS
@@ -109,9 +111,12 @@ const UICtrl = (function () {
             // INSERT ITEM
             document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
         },
-        clearInput:function(){
-            document.querySelector(UISelectors.itemNameInput).value='';
-            document.querySelector(UISelectors.itemCaloriesInput).value='';
+        clearInput: function () {
+            document.querySelector(UISelectors.itemNameInput).value = '';
+            document.querySelector(UISelectors.itemCaloriesInput).value = '';
+        },
+        hideList: function () {
+            document.querySelector(UISelectors.itemList).style.display = 'none';
         },
         getSelectors: function () {
             return UISelectors;
@@ -155,8 +160,13 @@ const App = (function (ItemCtrl, UICtrl) {
             // FETCH ITEMS FROM DATA STRUCTURE
             const items = ItemCtrl.getItems();
 
-            // POPULATE LIST WITH ITEMS
-            UICtrl.populateItemList(items);
+            // CHECK IF ANY ITEMS
+            if (items.length === 0) {
+                UICtrl.hideList();
+            } else {
+                // POPULATE LIST WITH ITEMS
+                UICtrl.populateItemList(items);
+            }
 
             // LOAD EVENT LISTENERS
             loadEventListeners();
