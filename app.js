@@ -67,6 +67,9 @@ const UICtrl = (function () {
     const UISelectors = {
         itemList: '#item-list',
         addBtn: '.add-btn',
+        updateBtn: '.update-btn',
+        deleteBtn: '.delete-btn',
+        backBtn: '.back-btn',
         itemNameInput: '#item-name',
         itemCaloriesInput: '#item-calories'
     }
@@ -118,6 +121,13 @@ const UICtrl = (function () {
         hideList: function () {
             document.querySelector(UISelectors.itemList).style.display = 'none';
         },
+        clearEditState:function(){
+            UICtrl.clearInput();
+            document.querySelector(UISelectors.updateBtn).style.display = 'none';
+            document.querySelector(UISelectors.deleteBtn).style.display = 'none';
+            document.querySelector(UISelectors.backBtn).style.display = 'none';
+            document.querySelector(UISelectors.addBtn).style.display = 'inline';
+        },
         getSelectors: function () {
             return UISelectors;
         }
@@ -157,6 +167,9 @@ const App = (function (ItemCtrl, UICtrl) {
     // PUBLIC METHODS
     return {
         init: function () {
+            // CLEAR EDIT STATE/SET INITIAL STATE
+            UICtrl.clearEditState();
+
             // FETCH ITEMS FROM DATA STRUCTURE
             const items = ItemCtrl.getItems();
 
