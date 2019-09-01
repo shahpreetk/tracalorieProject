@@ -98,7 +98,7 @@ const UICtrl = (function () {
             // CREATE LI ELEMENT
             const li = document.createElement('li');
             // ADD CLASS
-            li.className = 'colection-item';
+            li.className = 'collection-item';
             // ADD ID
             li.id = `item-${item.id}`;
             // ADD HTML
