@@ -257,7 +257,7 @@ const App = (function (ItemCtrl, UICtrl) {
         document.querySelector(UISelectors.deleteBtn).addEventListener('click', itemDeleteSubmit);
 
         // BACK BUTTON EVENT
-        // document.querySelector(UISelectors.backBtn).addEventListener('click', itemBackSubmit);
+        document.querySelector(UISelectors.backBtn).addEventListener('click', itemBackSubmit);
     }
 
     // ADD ITEM SUBMIT
@@ -355,17 +355,17 @@ const App = (function (ItemCtrl, UICtrl) {
     }
 
     // BACK BUTTON EVENT 
-    // const itemBackSubmit = function (e) {
-    //     // GET TOTAL CALORIES
-    //     const totalCalories = ItemCtrl.getTotalCalories();
+    const itemBackSubmit = function (e) {
+        // GET TOTAL CALORIES
+        const totalCalories = ItemCtrl.getTotalCalories();
 
-    //     // ADD TOTAL CALORIES TO UI
-    //     UICtrl.showTotalCalories(totalCalories);
+        // ADD TOTAL CALORIES TO UI
+        UICtrl.showTotalCalories(totalCalories);
 
-    //     UICtrl.clearEditState();
+        UICtrl.clearEditState();
 
-    //     e.preventDefault();
-    // }
+        e.preventDefault();
+    }
 
     // PUBLIC METHODS
     return {
