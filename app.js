@@ -51,6 +51,9 @@ const StorageCtrl = (function () {
             });
             localStorage.setItem('items', JSON.stringify(items));
         },
+        clearItemsFromStorage: function () {
+            localStorage.removeItem('items');
+        }
     }
 })();
 
@@ -146,6 +149,9 @@ const ItemCtrl = (function () {
 
             // REMOVE ITEM
             data.items.splice(index, 1);
+        },
+        clearAllItems:function(){
+            data.items=[];
         },
         setCurrentItem: function (item) {
             data.currentItem = item;
@@ -260,6 +266,15 @@ const UICtrl = (function () {
             document.querySelector(UISelectors.itemCaloriesInput).value = ItemCtrl.getCurrentItem().calories;
             UICtrl.showEditState();
         },
+        removeItems:function(){
+            let listItems=document.querySelectorAll(UISelectors.listItems);
+
+            listItems=Array.from(listItems);
+
+            listItems.forEach(function(item){
+                item.remove();
+            });
+        },
         hideList: function () {
             document.querySelector(UISelectors.itemList).style.display = 'none';
         },
@@ -314,6 +329,9 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
 
         // BACK BUTTON EVENT
         document.querySelector(UISelectors.backBtn).addEventListener('click', itemBackSubmit);
+
+        // CLEAR ALL
+        document.querySelector(UISelectors.clearBtn).addEventListener('click', clearAllItemsClick);
     }
 
     // ADD ITEM SUBMIT
@@ -430,6 +448,16 @@ const App = (function (ItemCtrl, StorageCtrl, UICtrl) {
         UICtrl.clearEditState();
 
         e.preventDefault();
+    }
+
+    // CLEAR ITEMS EVENT
+    const clearAllItemsClick = function () {
+        ItemCtrl.clearAllItems();
+        const totalCalories = ItemCtrl.getTotalCalories();
+        UICtrl.showTotalCalories(totalCalories);
+        UICtrl.removeItems();
+        StorageCtrl.clearItemsFromStorage();
+        UICtrl.hideList();
     }
 
     // PUBLIC METHODS
