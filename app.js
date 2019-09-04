@@ -128,6 +128,7 @@ const UICtrl = (function () {
         updateBtn: '.update-btn',
         deleteBtn: '.delete-btn',
         backBtn: '.back-btn',
+        clearBtn: '.clear-btn',
         itemNameInput: '#item-name',
         itemCaloriesInput: '#item-calories',
         totalCalories: '.total-calories'
@@ -192,7 +193,7 @@ const UICtrl = (function () {
         },
         deleteListItem: function (id) {
             const itemID = `#item-${id}`;
-            const item =document.querySelector(itemID);
+            const item = document.querySelector(itemID);
             item.remove();
         },
         clearInput: function () {
